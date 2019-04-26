@@ -39,3 +39,6 @@ else:#just load single image
 
 #process all images
 results = processor.processData()
+
+#export results
+exporter.exportData(results, userInput['outputFilePath'])
