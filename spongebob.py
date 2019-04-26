@@ -4,8 +4,6 @@ import dataExporter as exporter
 import glob
 import sys
 
-userInput = commandLine.parse()
-
 #get list of files in the specified directory
 #extensions - list of all extensions
 #directory - searched directory
@@ -16,7 +14,9 @@ def getFileList(extensions, directory):
         files.extend(glob.glob(directory + "/*." + extension))
         
     return files
-    
+
+userInput = commandLine.parse()
+
 #if user entered directory instead of data then use glob to find all images in the directory
 if userInput['inputIsFile'] == False:
     images = getFileList(["jpg", "png", "gif", "bmp"], userInput['dataInputPath'])
@@ -36,3 +36,6 @@ else:#just load single image
     print("Loading file " + userInput['dataInputPath'] + " ...")
     processor.loadImage(userInput['dataInputPath'])
     
+
+#process all images
+results = processor.processData()
