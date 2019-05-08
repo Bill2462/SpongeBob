@@ -64,4 +64,4 @@ def processData():
         }
         results.append(result)
             
-    return results
+    return results, imageData
