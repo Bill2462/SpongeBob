@@ -1,22 +1,4 @@
 import cv2
-import sys
-
-this = sys.modules[__name__] 
-
-#images buffer
-this.rawImages = []
-
-#load image to the memory
-def loadImage(filename):
-    image = {
-        'image': cv2.imread(filename),
-        'filename': filename
-        }
-    this.rawImages.append(image)
-
-#empty data processor buffers
-def empty():
-    this.rawImages = []
 
 #calculate avarage brightness of the image
 def calcAvgBrightness(image):
@@ -47,21 +29,43 @@ def processImage(image):
     image = cv2.threshold(image, calcAvgBrightness(image), 255, cv2.THRESH_BINARY)
     return image[1]
 
-#process data
-#returns the array of results
-def processData():
-    results = []
-    for image in rawImages:
-        print("Processing image '" + image['filename'] + "' ...")
-        imageData = processImage(image)
-        darkPixels, brigthPixels, pixelTotalCount = countPixels(imageData)
-        porosity = (darkPixels/pixelTotalCount)*100
-        print("Porosity: " + str(porosity) + "%")
-        
-        result = {
-            'filename': image['filename'],
-            'porosity': porosity
-        }
-        results.append(result)
-            
-    return results, imageData
+#just create new image processor
+def imageProcessor():
+    return imageProcessor()
+
+class imageProcessor:
+    rawImages = []
+
+    def __init__(self):
+        pass
+
+    #load image to the memory
+    def loadImage(self, filename):
+        image = {
+            'image': cv2.imread(filename),
+            'filename': filename
+            }
+        self.rawImages.append(image)
+
+    #empty data processor buffers
+    def empty():
+        self.rawImages = []
+
+    #process data
+    #returns the array of results
+    def process(self):
+        results = []
+        for image in self.rawImages:
+            print("Processing image '" + image['filename'] + "' ...")
+            imageData = processImage(image)
+            darkPixels, brigthPixels, pixelTotalCount = countPixels(imageData)
+            porosity = (darkPixels/pixelTotalCount)*100
+            print("Porosity: " + str(porosity) + "%")
+
+            result = {
+                'filename': image['filename'],
+                'porosity': porosity
+            }
+            results.append(result)
+
+        return results, imageData

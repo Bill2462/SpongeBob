@@ -1,6 +1,6 @@
-from . import processor
+from .processor import imageProcessor
 from . import commandLine
-from . import dataExporter as exporter
+from .dataExporter import exportAsCSV
 import glob
 import sys
 
@@ -16,6 +16,8 @@ def getFileList(extensions, directory):
     return files
 
 userInput = commandLine.parse()
+
+processor = imageProcessor()
 
 #if user entered directory instead of data then use glob to find all images in the directory
 if userInput['inputIsFile'] == False:
@@ -38,9 +40,7 @@ else:#just load single image
 
 
 #process all images
-results, processImages = processor.processData()
+results, processImages = processor.process()
 
-#export results to csv if option is set
-exporter.exportData(results, userInput['outputFilePath'])
-
-#if option is set then process
+#export results to csv
+exportAsCSV(results, userInput['outputFilePath'])
