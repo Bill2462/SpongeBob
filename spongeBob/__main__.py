@@ -43,4 +43,5 @@ else:#just load single image
 results, processImages = processor.process()
 
 #export results to csv
-exportAsCSV(results, userInput['outputFilePath'])
+if not(userInput['outputFilePath'] is None):
+    exportAsCSV(results, userInput['outputFilePath'])

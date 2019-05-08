@@ -7,7 +7,7 @@ def parse():
     #define arguments taken by the program
     parser = argparse.ArgumentParser(description='Calculate porosity based on microscopic images')
     parser.add_argument('dataInput', type=str, help='Path to an image file or directory containing raw images')
-    parser.add_argument('--output-file', type=str, help='Path to the file that will contain results', required=True)
+    parser.add_argument('--output-file', type=str, help='Path to the file that will contain results')
 
     args = parser.parse_args()
 
